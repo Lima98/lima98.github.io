@@ -345,46 +345,6 @@
         margin-top: auto;
       }
 
-      .quick-edit {
-        display: grid;
-        grid-template-columns: minmax(0, 0.82fr) minmax(280px, 1fr);
-        gap: 24px;
-        align-items: start;
-        padding: 32px;
-        border: 1px solid rgba(221, 226, 232, 0.9);
-        border-radius: 8px;
-        background: #17202e;
-        color: white;
-      }
-
-      .quick-edit p {
-        color: #c3ccd8;
-      }
-
-      code {
-        border-radius: 4px;
-        background: rgba(255, 255, 255, 0.1);
-        color: #dff8ef;
-        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      }
-
-      pre {
-        margin: 0;
-        overflow-x: auto;
-        border-radius: 8px;
-        background: #0d1420;
-        color: #e8eef6;
-      }
-
-      pre code {
-        display: block;
-        padding: 20px;
-        background: transparent;
-        color: inherit;
-        font-size: 0.9rem;
-        line-height: 1.6;
-      }
-
       .site-footer {
         width: min(1120px, calc(100% - 32px));
         margin: 0 auto;
@@ -404,8 +364,7 @@
           justify-content: flex-start;
         }
 
-        .hero,
-        .quick-edit {
+        .hero {
           grid-template-columns: 1fr;
         }
 
@@ -456,8 +415,7 @@
 
         .hero-panel,
         .project-card,
-        .link-card,
-        .quick-edit {
+        .link-card {
           padding: 18px;
         }
       }
@@ -474,7 +432,6 @@
         <div class="nav-links">
           <a href="#projects">Projects</a>
           <a href="#links">Links</a>
-          <a href="#add">Add cards</a>
           <a href="https://github.com/lima98">GitHub</a>
         </div>
       </nav>
@@ -486,9 +443,9 @@
           <p class="eyebrow">GitHub projects, research, and useful links</p>
           <h1 id="hero-title">A small launchpad for my GitHub stuff.</h1>
           <p class="hero-copy">
-            Selected repos, thesis work, dotfiles, experiments, and profiles collected in one place.
-            Built as a lightweight GitHub Pages landing page that is easy to extend when something
-            new deserves a card.
+            Selected repositories, thesis work, dotfiles, experiments, and profiles collected in
+            one place. This page highlights the projects and links that best represent what I am
+            building, studying, and exploring.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#projects">View projects</a>
@@ -529,8 +486,8 @@
         <div class="section-heading">
           <h2 id="projects-title">Featured Projects</h2>
           <p>
-            The first shelf: things I want people to find quickly, from thesis material to
-            configuration and future experiments.
+            A curated selection of research, configuration, and software projects worth finding
+            quickly.
           </p>
         </div>
         <div class="project-grid" id="featured-projects"></div>
@@ -540,30 +497,10 @@
         <div class="section-heading">
           <h2 id="links-title">Elsewhere</h2>
           <p>
-            Profiles and useful destinations that are not necessarily repos, but still belong
-            on the same page.
+            Profiles and destinations connected to my work, interests, and public activity online.
           </p>
         </div>
         <div class="link-grid" id="profile-links"></div>
-      </section>
-
-      <section class="section" id="add" aria-labelledby="add-title">
-        <div class="quick-edit">
-          <div>
-            <h2 id="add-title">Easy to add the next cool thing.</h2>
-            <p>
-              New cards live in the arrays at the bottom of this file. Duplicate one object,
-              change the title, description, tags, and links, and the layout handles the rest.
-            </p>
-          </div>
-          <pre><code>{
-  title: "New Repo",
-  description: "What it is and why it matters.",
-  tags: ["Python", "Tooling"],
-  href: "https://github.com/lima98/new-repo",
-  color: "#315a8c"
-}</code></pre>
-        </div>
       </section>
     </main>
 
@@ -571,95 +508,6 @@
       <p>© 2026 Jan-Øivind Lima. Hosted with GitHub Pages.</p>
     </footer>
 
-    <script>
-      const featuredProjects = [
-        {
-          title: "Master Thesis",
-          description:
-            "Procedural music generation work, examples, generated audio, scores, and technical documentation from the thesis project.",
-          tags: ["Research", "Music", "Python", "Procedural Generation"],
-          href: "https://lima98.github.io/TTK4900",
-          secondaryHref: "https://github.com/lima98/TTK4900",
-          secondaryLabel: "See repo",
-          color: "#1f8a70"
-        },
-        {
-          title: "Dotfiles",
-          description:
-            "Personal shell, editor, terminal, and system configuration for keeping the development environment sharp and portable.",
-          tags: ["Setup", "CLI", "Config"],
-          href: "https://github.com/lima98/dotfiles",
-          color: "#315a8c"
-        },
-        {
-          title: "All Repositories",
-          description:
-            "The complete GitHub repository list for Lima98, including experiments and work that may later graduate to this page.",
-          tags: ["GitHub", "Archive"],
-          href: "https://github.com/lima98?tab=repositories",
-          color: "#6f5f90"
-        }
-      ];
-
-      const profileLinks = [
-        {
-          title: "GitHub Profile",
-          description: "Main code profile, repositories, contributions, and project history.",
-          href: "https://github.com/lima98",
-          label: "Open GitHub"
-        },
-        {
-          title: "Lichess",
-          description: "Chess profile for Lima98 on Lichess.",
-          href: "https://lichess.org/@/Lima98",
-          label: "Open Lichess"
-        },
-      ];
-
-      function renderTags(tags) {
-        return tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
-      }
-
-      function renderProjects(projects) {
-        const container = document.querySelector("#featured-projects");
-        container.innerHTML = projects
-          .map(
-            (project) => `
-              <article class="project-card" style="--card-color: ${project.color}">
-                <div class="card-meta">${renderTags(project.tags)}</div>
-                <h3>${project.title}</h3>
-                <p>${project.description}</p>
-                <div class="card-actions">
-                  <a class="button primary" href="${project.href}">Open project</a>
-                  ${
-                    project.secondaryHref
-                      ? `<a class="button secondary" href="${project.secondaryHref}">${project.secondaryLabel}</a>`
-                      : ""
-                  }
-                </div>
-              </article>
-            `
-          )
-          .join("");
-      }
-
-      function renderProfileLinks(links) {
-        const container = document.querySelector("#profile-links");
-        container.innerHTML = links
-          .map(
-            (link) => `
-              <article class="link-card">
-                <h3>${link.title}</h3>
-                <p>${link.description}</p>
-                <a class="button secondary" href="${link.href}">${link.label}</a>
-              </article>
-            `
-          )
-          .join("");
-      }
-
-      renderProjects(featuredProjects);
-      renderProfileLinks(profileLinks);
-    </script>
+    <script type="module" src="./cards.js"></script>
   </body>
 </html>
